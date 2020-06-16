@@ -5,11 +5,13 @@ import com.springtraining.petclinic.model.Pet;
 import com.springtraining.petclinic.services.OwnerService;
 import com.springtraining.petclinic.services.PetService;
 import com.springtraining.petclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
     private final PetService petService;
@@ -54,7 +56,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
                         throw new RuntimeException("Pet Type is required");
                     }
 
-                    if (pet.getPetType() == null) {
+                    if (pet.getId() == null) {
                         Pet savedPet = petService.save(pet);
                         pet.setId(savedPet.getId());
                     }
