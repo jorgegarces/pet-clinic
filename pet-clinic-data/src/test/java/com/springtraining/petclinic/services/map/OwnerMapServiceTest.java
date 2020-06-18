@@ -35,7 +35,7 @@ class OwnerMapServiceTest {
         assertEquals(ownerId, owner.getId());
     }
 
-    @Test
+   @Test
     void delete() {
         ownerMapService.delete(testOwner);
 
@@ -52,10 +52,11 @@ class OwnerMapServiceTest {
 
     @Test
     void findByLastName() {
-        ownerMapService.save(Owner.builder().lastName("Petrov").build());
+        ownerMapService.map.clear();
+        ownerMapService.save(Owner.builder().id(2L).lastName("Petrov").build());
         Owner owner = ownerMapService.findByLastName("Petrov");
 
         assertNotNull(owner);
-        assertEquals("Petrov", owner.getLastName());
+        assertEquals(2, owner.getId());
     }
 }
